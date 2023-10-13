@@ -5,9 +5,22 @@ head
   link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap')
   link(rel='stylesheet' href='./build/css/global.css')
   script(src="./pug/jquery.js")
-ol(id=("list"))
-  .user1
-    #info1 Nick
-    #link1 !
-button#button(onclick="f()")
+ol(id=("list") start=1)
+  li(onclick="user_action(0)")
+  li(onclick="user_action(1)")
+  li(onclick="user_action(2)")
+  li(onclick="user_action(3)")
+  li(onclick="user_action(4)")
+  li(onclick="user_action(5)")
+  li(onclick="user_action(6)")
+  li(onclick="user_action(7)")
+  li(onclick="user_action(8)")
+  li(onclick="user_action(9)")
+#user_action
+  #avatar img
+  #information info
+  button#friends friends
+  button#close_info close
 script(src="../js/client.js")
+script.
+  update_list()
