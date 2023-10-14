@@ -1,107 +1,84 @@
 class Manager{
     fs = require("fs")
-    books
+    users
     id
+    selected_user = null
     constructor() {
-        this.update_books()
+        this.update_users()
         this.id = 0
-        for(let i = 0; i < this.books.length; i++){
-            if(this.books[i]["id"] >= this.id){
-                this.id = this.books[i]["id"] + 1
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] >= this.id){
+                this.id = this.users[i]["id"] + 1
             }
         }
     }
 
-    update_books(){
-        this.books = JSON.parse(this.fs.readFileSync('users.json', 'utf8'));
+    update_users(){
+        this.users = JSON.parse(this.fs.readFileSync('users.json', 'utf8'));
     }
     write_to_file(){
-        this.fs.writeFileSync("users.json", JSON.stringify(this.books))
+        this.fs.writeFileSync("users.json", JSON.stringify(this.users))
     }
 
     add_to_library(body){
-        this.update_books()
+        this.update_users()
         body["id"] = this.id
         body["owner"] = null
         body["returnDate"] = null
-        this.books.push(body)
+        this.users.push(body)
         this.write_to_file()
         this.id++
     }
 
     delete_from_library(body){
-        this.update_books()
-        for(let i = 0; i < this.books.length; i++){
-            if(this.books[i]["id"] == body["id"]){
-                this.books.splice(i, 1)
+        this.update_users()
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] == body["id"]){
+                this.users.splice(i, 1)
             }
         }
         this.write_to_file()
     }
 
     send_library(){
-        this.update_books()
-        return JSON.stringify(this.books)
-    }
+        this.update_users()
+        if(!this.selected_user) {
+            return JSON.stringify(this.users)
+        } else {
+            let friends_indexes
+            let friends = []
 
-    sort_stock(){
-        this.update_books()
-        let sorted = []
-        for(let i = 0; i < this.books.length; i++){
-            if(!this.books[i]["owner"]){
-                sorted.push(this.books[i])
+            for(let i = 0; i < this.users.length; i++){
+                if(this.users[i]["id"] == this.selected_user){
+                    friends_indexes = this.users[i]["friends"]
+                }
             }
+
+            for(let i = 0; i < friends_indexes.length; i++){
+                for(let j = 0; j < this.users.length; j++){
+                    if(this.users[j]["id"] == friends_indexes[i]){
+                        friends.push(this.users[j])
+                    }
+                }
+            }
+
+            return JSON.stringify(friends)
         }
-        return JSON.stringify(sorted)
     }
 
-    sort_date(){
-        this.update_books()
-        this.books.sort(function(a, b){
-            a = a.returnDate
-            b = b.returnDate
-            if(a == null){
-                a = "-1"
-            }
-            if(b == null){
-                b = "-1"
-            }
-            console.log(typeof a.returnDate)
-            if(a < b) return 1
-            return -1
-        })
-        return JSON.stringify(this.books)
+    select_user(body){
+        this.selected_user = body["selected_user"]
     }
 
-    issue_book(body){
-        this.update_books()
-        for(let i = 0; i < this.books.length; i++){
-            if(this.books[i]["id"] == body["id"]){
-                this.books[i]["owner"] = body["owner"]
-                this.books[i]["returnDate"] = body["date"]
-            }
-        }
-        this.write_to_file()
-    }
-
-    return_book(body){
-        this.update_books()
-        for(let i = 0; i < this.books.length; i++){
-            if(this.books[i]["id"] == body["id"]){
-                this.books[i]["owner"] = null
-                this.books[i]["returnDate"] = null
-            }
-        }
-        this.write_to_file()
-    }
-
-    redact_book(body){
-        this.update_books()
-        for(let i = 0; i < this.books.length; i++){
-            if(this.books[i]["id"] == body["id"]){
-                if(body["title"]) this.books[i]["title"] = body["title"]
-                if(body["author"]) this.books[i]["author"] = body["author"]
-                if(body["year"]) this.books[i]["year"] = body["year"]
+    change_user(body){
+        this.update_users()
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] == body["id"]){
+                this.users[i]["name"] = body["name"]
+                this.users[i]["email"] = body["email"]
+                this.users[i]["bd"] = body["bd"]
+                this.users[i]["role"] = body["role"]
+                this.users[i]["status"] = body["status"]
             }
         }
         this.write_to_file()

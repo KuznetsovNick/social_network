@@ -10,7 +10,7 @@ const file_upload = require("express-fileupload");
 server.use(file_upload());
 
 server.set("view engine", "pug")
-const jq = require("jQuery")
+//const jq = require("jQuery")
 
 const port = 3000
 

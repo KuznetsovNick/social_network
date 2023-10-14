@@ -11,26 +11,7 @@ body{
   width: 100%;
 }
 
-#list {
-  visibility: hidden;
-  padding: 0;
-  position: absolute;
-  left: calc(50% - @list_width/2);
-  top: 20%;
-  //padding-left: @list_width;
-  width: @list_width;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-#list li{
-  cursor: pointer;
-  width: auto;
-}
-
-#user_action{
-  visibility: hidden;
-  display: flex;
-  flex-direction: row;
+#name::placeholder, #email::placeholder, #bd::placeholder,
+#role::placeholder, #status::placeholder, #friends::placeholder{
+  color: black;
 }

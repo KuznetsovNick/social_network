@@ -8,7 +8,7 @@ const fsExtra = require('fs-extra');
 
 function templates(cb) {
     console.log("Templates function");
-    src('./pug/index.pug')
+    src('./pug/*.pug')
         .pipe(pug())
         .pipe(dest('./build/html'));
     cb();

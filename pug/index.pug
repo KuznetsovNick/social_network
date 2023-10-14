@@ -4,9 +4,9 @@ head
   meta(name='viewport' content='initial-scale=1, width=device-width')
   link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap')
   link(rel='stylesheet' href='./build/css/global.css')
-  script(src="./pug/jquery.js")
-ol(id=("list") start=1)
-  li(onclick="user_action(0)")
+  link(rel='stylesheet' href='./build/css/list.css')
+  script(src="./js/jquery.js")
+ol(class="list" start=1)
   li(onclick="user_action(1)")
   li(onclick="user_action(2)")
   li(onclick="user_action(3)")
@@ -16,11 +16,31 @@ ol(id=("list") start=1)
   li(onclick="user_action(7)")
   li(onclick="user_action(8)")
   li(onclick="user_action(9)")
-#user_action
-  #avatar img
-  #information info
-  button#friends friends
-  button#close_info close
+  li(onclick="user_action(10)")
+.user_action
+  input#name(type="text")
+  input#email(type="email")
+  input#bd(type="date")
+  .role
+    input#admin(type="radio" name="role" value="admin")
+    label(for="admin") admin
+    input#user(type="radio" name="role" value="user")
+    label(for="user") user
+  .status
+    input#unconfirmed(type="radio" name="status" value="unconfirmed")
+    label(for="unconfirmed") unconf
+    input#active(type="radio" name="status" value="active")
+    label(for="active") active
+    input#blocked(type="radio" name="status" value="blocked")
+    label(for="blocked") block
+  button#new(onclick="open_news()") news
+  button#save_changes(onclick="save_changes()") save
+  button#news(onclick="save_changes()") news
+  button#friends(onclick="open_friends()") friends
+  button#close_info(onclick="close_info()") close
+button#prev(onclick="prev_page()") prev
+button#next(onclick="next_page()") next
 script(src="../js/client.js")
+script(src="../js/requests.js")
 script.
   update_list()
