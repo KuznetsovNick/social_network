@@ -9,9 +9,17 @@ body{
   margin: 0;
   height: 100%;
   width: 100%;
+  background-color: lightblue;
+  text-align: center;
 }
 
 #name::placeholder, #email::placeholder, #bd::placeholder,
 #role::placeholder, #status::placeholder, #friends::placeholder{
   color: black;
+}
+
+#email:hover, #name:hover, #bd:hover, #close_info:hover, #save_changes:hover,
+#friends:hover, #news:hover, #next:hover, #prev:hover, .list li:hover, #img:hover{
+  transform: scale(1.1);
+  transition: 0.2s linear;
 }

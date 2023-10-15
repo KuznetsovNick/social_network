@@ -1,6 +1,7 @@
 @import "global.less";
 
 .list {
+  list-style: none;
   visibility: hidden;
   padding: 0;
   position: absolute;
@@ -10,4 +11,24 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap: calc(@font/5);
+}
+
+.list li{
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: pink;
+  border-radius: calc(@font/2);
+}
+
+#close_info{
+  position: absolute;
+  bottom: calc(@list_width/5);
+  left: calc(50% - @list_width/10);
+  text-align: center;
+  border: none;
+  background-color: pink;
+  cursor: pointer;
+  border-radius: calc(@font/2);
 }

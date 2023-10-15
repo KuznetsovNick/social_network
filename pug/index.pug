@@ -11,7 +11,8 @@ head
     script(src= `${dir}/js/requests.js`)
   else
     script(src= `${dir}/js/start.js`)
-ol(class="list" start=1)
+.card
+ol(class="list" start=1) List
   li(onclick="user_action(1)")
   li(onclick="user_action(2)")
   li(onclick="user_action(3)")
@@ -23,6 +24,7 @@ ol(class="list" start=1)
   li(onclick="user_action(9)")
   li(onclick="user_action(10)")
 .user_action
+  img#img
   input#name(type="text")
   input#email(type="email")
   input#bd(type="date")

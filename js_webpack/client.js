@@ -62,18 +62,36 @@ function user_action(ind){
     $('input[name=status]').attr('checked',false);
     $(`#${user["role"]}`).attr("checked", "checked")
     $(`#${user["status"]}`).attr("checked", "checked")
+
+    $("#next").css("visibility", "hidden")
+    $("#prev").css("visibility", "hidden")
+
+    rotation(document.getElementsByClassName("user_action").item(0), -180, 0)
+    opac(document.getElementsByClassName("user_action").item(0), 0, 1)
+    opac(document.getElementsByClassName("list").item(0), 1, 0)
 }
 window.user_action = user_action
 
 function close_info(){
     let list = $(".list")
     let info = $(".user_action")
-    info.css("visibility", "hidden")
-    list.css("display", "flex")
+    rotation(document.getElementsByClassName("user_action").item(0), 0, 180)
+    opac(document.getElementsByClassName("user_action").item(0), 1, 0)
+    setTimeout(() => {
+        info.css("visibility", "hidden")
+        list.css("display", "flex")
+        opac(document.getElementsByClassName("list").item(0), 0, 1)
+        $("#next").css("visibility", "visible")
+        $("#prev").css("visibility", "visible")
+    }, 500)
 }
+
+window.close_info = close_info
 
 function back_to_list(){
     document.location.href = "/"
+    $("#next").css("visibility", "visible")
+    $("#prev").css("visibility", "visible")
 }
 window.back_to_list = back_to_list
 function show_news(data){
@@ -87,3 +105,26 @@ function show_news(data){
 
 window.show_news = show_news
 
+function rotation(div, start, finish){
+    div.animate([
+        { transform: `rotateY(${start}deg)` },
+        { transform: `rotateY(${finish}deg)` }
+    ], {
+        // sync options
+        duration: 500,
+        iterations: 1
+    })
+}
+window.rotation = rotation
+
+function opac(div, start, finish){
+    div.animate([
+        { opacity: `${start}` },
+        { opacity: `${finish}` }
+    ], {
+        // sync options
+        duration: 500,
+        iterations: 1
+    })
+}
+window.opac = opac

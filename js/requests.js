@@ -31,8 +31,6 @@ function update_list(){
 }
 
 function save_changes(){
-    console.log()
-    console.log()
     let data = {
         id: selected_user,
         name: $("#name").val(),
@@ -44,10 +42,10 @@ function save_changes(){
     sendRequest("POST", "/save_changes", data)
         .then(res => res.json())
         .then(json => {
-            alert("Redacted successfully")
             users = JSON.parse(json)
             fill_table()
         })
+    close_info()
 }
 
 
