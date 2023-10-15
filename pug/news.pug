@@ -3,9 +3,9 @@ head
     meta(charset='utf-8')
     meta(name='viewport' content='initial-scale=1, width=device-width')
     link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap')
-    link(rel='stylesheet' href='./build/css/global.css')
-    link(rel='stylesheet' href='./build/css/news.css')
-    script(src="./build/js/server.min.js")
+    link(rel='stylesheet' href=`${dir}/css/global.css`)
+    link(rel='stylesheet' href=`${dir}/css/news.css`)
+    script(src= `${dir}/js/server.min.js`)
 .news
 .user_action
     button#close_info(onclick="back_to_list()") close

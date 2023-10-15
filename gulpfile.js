@@ -14,7 +14,11 @@ const beautify = require('gulp-beautify');
 
 function templates(cb) {
     src('./pug/*.pug')
-        .pipe(pug())
+        .pipe(pug({
+            data: {
+                dir: "./build"
+            }
+        }))
         .pipe(cleanHTML())
         .pipe(beautify.html({ indent_size: 4 }))
         .pipe(dest('build/html'));
