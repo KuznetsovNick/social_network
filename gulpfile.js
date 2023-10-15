@@ -38,7 +38,7 @@ function code(cb) {
         .pipe(babel({
             presets: ['@babel/preset-env']
         }))
-        .pipe(concat('server.min.js'))
+        //.pipe(concat('server.min.js'))
         //.pipe(ugly())
         .pipe(dest('build/js'));
     src('./js/manager.js')

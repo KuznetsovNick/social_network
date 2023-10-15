@@ -3,12 +3,15 @@ const router = express.Router();
 const pug = require("pug")
 const path = require('path')
 
-let Manager = require('./build/js/manager.js');
+let dir = "./build"
+//let dir = "./dist"
+
+let Manager = require(`${"./build"}/js/manager.js`);
 let manager = new Manager();
 
 router.get("/", (req, res, next) => {
     manager.selected_user = null
-    res.sendFile(path.join(__dirname, "./build/html/index.html"))
+    res.sendFile(path.join(__dirname, `${dir}/html/index.html`))
 });
 
 router.post("/update", (req, res) => {
@@ -22,7 +25,7 @@ router.post("/save_changes", (req, res) => {
 
 router.get("/friends", (req, res) => {
     if(manager.selected_user) {
-        res.sendFile(path.join(__dirname, "./build/html/friends.html"))
+        res.sendFile(path.join(__dirname, `${dir}/html/friends.html`))
     } else{
         res.redirect("/")
     }
@@ -37,7 +40,7 @@ router.post("/select_user", (req, res) => {
 
 router.get("/news_page", (req, res) => {
     if(manager.selected_user) {
-        res.sendFile(path.join(__dirname, "./build/html/news.html"))
+        res.sendFile(path.join(__dirname, `${dir}/html/news.html`))
     } else{
         res.redirect("/")
     }
