@@ -66,3 +66,12 @@ function back_to_list(){
     document.location.href = "/"
 }
 
+function show_news(data){
+    for(let i = 0; i < data.length; i++){
+        $("<h3 />", { text: data[i]["name"] }).appendTo(".news");
+        for(let j = 0; j < data[i]["posts"].length; j++){
+            $("<p />", { text: data[i]["posts"][j] }).appendTo(".news");
+        }
+    }
+}
+

@@ -66,6 +66,36 @@ class Manager{
         }
     }
 
+    send_news(){
+        this.update_users()
+        let friends_indexes
+        let news = JSON.parse(this.fs.readFileSync('news.json', 'utf8'));
+        let send_news = []
+
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] == this.selected_user){
+                friends_indexes = this.users[i]["friends"]
+            }
+        }
+
+        for(let i = 0; i < friends_indexes.length; i++){
+            for(let j = 0; j < this.users.length; j++){
+                if(this.users[j]["id"] == friends_indexes[i]){
+                    for(let k=0; k < news.length; k++){
+                        if(this.users[j]["id"] == news[k]["id"]) {
+                            send_news.push({
+                                name: this.users[j]["name"],
+                                posts: news[k]["posts"]
+                            })
+                        }
+                    }
+                }
+            }
+        }
+
+        return JSON.stringify(send_news)
+    }
+
     select_user(body){
         this.selected_user = body["selected_user"]
     }

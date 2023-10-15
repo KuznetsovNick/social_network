@@ -1,16 +1,1 @@
-body {
-  font-size: 1rem;
-  font-family: Rubik;
-  position: absolute;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-}
-#name::placeholder,
-#email::placeholder,
-#bd::placeholder,
-#role::placeholder,
-#status::placeholder,
-#friends::placeholder {
-  color: black;
-}
+body{font-size:1rem;font-family:Rubik;position:absolute;margin:0;height:100%;width:100%}#bd::placeholder,#email::placeholder,#friends::placeholder,#name::placeholder,#role::placeholder,#status::placeholder{color:#000}

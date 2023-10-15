@@ -42,7 +42,22 @@ function save_changes(){
         status: $("input[name=status]:checked").val(),
     }
     sendRequest("POST", "/save_changes", data)
-        .then(res => {
+        .then(res => res.json())
+        .then(json => {
             alert("Redacted successfully")
+            users = JSON.parse(json)
+            fill_table()
         })
+}
+
+
+function open_news(){
+    sendRequest("POST", "/select_user", {selected_user: selected_user})
+    document.location.href = "/news_page"
+}
+
+function get_news(){
+    sendRequest("GET", "/send_news")
+        .then(res => res.json())
+        .then(json => show_news(JSON.parse(json)))
 }
