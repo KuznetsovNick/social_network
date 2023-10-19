@@ -2,7 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express()
 const fs = require('fs');
+const cors = require('cors')
+const corsOptions = {
+    'credentials': true,
+    'origin': true,
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'allowedHeaders': 'Authorization,X-Requested-With,X-HTTPMethod-Override,Content-Type,Cache-Control,Accept',
+}
+app.use(cors(corsOptions))
 
+
+//ToDo change server to app
 const port = 8443;
 httpsOptions = {
     key: fs.readFileSync('./certs/open.key', 'utf8'),

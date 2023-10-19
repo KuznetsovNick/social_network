@@ -14,8 +14,12 @@ router.get("/", (req, res, next) => {
     res.sendFile(path.join(__dirname, `${dir}/html/index.html`))
 });
 
-router.post("/update", (req, res) => {
+router.get("/update", (req, res) => {
     res.json(manager.send_library())
+})
+
+router.post("/get_friends", (req, res) => {
+    res.json(manager.send_friends(req.body.id))
 })
 
 router.post("/save_changes", (req, res) => {
@@ -31,11 +35,13 @@ router.get("/friends", (req, res) => {
     }
 })
 
-
-
 router.post("/select_user", (req, res) => {
     manager.select_user(req.body)
     res.end()
+})
+
+router.post("/get_user", (req, res) => {
+    res.json(manager.send_user(req.body))
 })
 
 router.get("/news_page", (req, res) => {

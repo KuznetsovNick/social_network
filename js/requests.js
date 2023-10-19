@@ -21,11 +21,21 @@ function open_friends(){
 
 
 function update_list(){
-    sendRequest("POST", "/update")
+    sendRequest("GET", "/update")
         .then(res => res.json())
         .then(json => {
             page = 1
-            users = JSON.parse(json)
+            users = json
+            fill_table()
+        })
+}
+
+function update_friends(){
+    sendRequest("GET", "/update_friends")
+        .then(res => res.json())
+        .then(json => {
+            page = 1
+            users = json
             fill_table()
         })
 }
@@ -42,7 +52,7 @@ function save_changes(){
     sendRequest("POST", "/save_changes", data)
         .then(res => res.json())
         .then(json => {
-            users = JSON.parse(json)
+            users = json
             fill_table()
         })
     close_info()
@@ -57,5 +67,5 @@ function open_news(){
 function get_news(){
     sendRequest("GET", "/send_news")
         .then(res => res.json())
-        .then(json => show_news(JSON.parse(json)))
+        .then(json => show_news(json))
 }
