@@ -52,8 +52,8 @@ router.get("/news_page", (req, res) => {
     }
 })
 
-router.get("/send_news", (req, res) => {
-    res.json(manager.send_news())
+router.post("/send_news", (req, res) => {
+    res.json(manager.send_news(req.body.id))
 })
 
 router.get("*", (req, res)=>{

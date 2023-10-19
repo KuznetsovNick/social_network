@@ -66,17 +66,20 @@ class Manager{
         return this.users
     }
 
-    send_news(){
+    send_news(user = this.selected_user){
+        console.log(user)
         this.update_users()
         let friends_indexes
         let news = JSON.parse(this.fs.readFileSync('news.json', 'utf8'));
         let send_news = []
 
         for(let i = 0; i < this.users.length; i++){
-            if(this.users[i]["id"] == this.selected_user){
+            if(this.users[i]["id"] == user){
                 friends_indexes = this.users[i]["friends"]
             }
         }
+
+        console.log(friends_indexes)
 
         for(let i = 0; i < friends_indexes.length; i++){
             for(let j = 0; j < this.users.length; j++){
