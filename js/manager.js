@@ -23,14 +23,17 @@ class Manager{
         this.fs.writeFileSync("users.json", JSON.stringify(this.users))
     }
 
-    add_to_library(body){
+    add_user(body){
+        console.log(body)
         this.update_users()
         body["id"] = this.id
-        body["owner"] = null
-        body["returnDate"] = null
+        body["role"] = "user"
+        body["status"] = "active"
+        body["img"] = false
         this.users.push(body)
         this.write_to_file()
         this.id++
+        return({id: this.id-1})
     }
 
     delete_from_library(body){
@@ -81,6 +84,19 @@ class Manager{
             }
         }
 
+        for(let i=0; i< news.length; i++){
+            if (news[i]["id"] == user){
+                for(let j =0; j < this.users.length; j++){
+                    if (news[i]["id"] == this.users[j]["id"]){
+                        send_news.push({
+                            name: this.users[j]["name"],
+                            posts: news[i]["posts"]
+                        })
+                    }
+                }
+            }
+        }
+
         for(let i = 0; i < friends_indexes.length; i++){
             for(let j = 0; j < this.users.length; j++){
                 if(this.users[j]["id"] == friends_indexes[i]){
@@ -97,6 +113,10 @@ class Manager{
         }
 
         return send_news
+    }
+
+    add_new(user = this.selected_user){
+
     }
 
     select_user(body){
@@ -161,6 +181,7 @@ class Manager{
         }
         return chat
     }
+
 }
 
 

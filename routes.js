@@ -65,6 +65,10 @@ router.post("/send_chat", (req, res) => {
     res.json(manager.send_chat(req.body))
 });
 
+router.post("/add_user", (req, res) => {
+    res.json(manager.add_user(req.body))
+});
+
 router.get("*", (req, res)=>{
     res.status(404);
     res.end("Page not found");
