@@ -1,3 +1,6 @@
+const path = require("path");
+const fs = require("fs");
+
 class Manager{
     fs = require("fs")
     users
@@ -123,6 +126,40 @@ class Manager{
             }
         }
         return data
+    }
+
+    send_image(body){
+        this.update_users()
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] == body.id){
+                if(this.users[i]["img"]){
+                    return path.join(__dirname + `/../img/${body.id}.png`)
+                } else{
+                    return path.join(__dirname + `/../img/default.png`)
+                }
+            }
+        }
+    }
+
+    send_chat(body){
+        let chats = JSON.parse(this.fs.readFileSync('messages.json', 'utf8'));
+        let chat
+        let found = false
+        for(let i = 0; i < chats.length; i++){
+            if(body.chanel == chats[i]["chanel"]){
+                chat = chats[i]
+                found = true
+            }
+        }
+        if(!found){
+            chat = {
+                chanel: body.chanel,
+                messages: []
+            }
+            chats.push(chat)
+            this.fs.writeFileSync("messages.json", JSON.stringify(chats))
+        }
+        return chat
     }
 }
 

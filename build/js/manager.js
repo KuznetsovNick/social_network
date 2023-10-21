@@ -1,3 +1,6 @@
+const path = require("path");
+const fs = require("fs");
+
 class Manager{
     fs = require("fs")
     users
@@ -67,7 +70,6 @@ class Manager{
     }
 
     send_news(user = this.selected_user){
-        console.log(user)
         this.update_users()
         let friends_indexes
         let news = JSON.parse(this.fs.readFileSync('news.json', 'utf8'));
@@ -78,8 +80,6 @@ class Manager{
                 friends_indexes = this.users[i]["friends"]
             }
         }
-
-        console.log(friends_indexes)
 
         for(let i = 0; i < friends_indexes.length; i++){
             for(let j = 0; j < this.users.length; j++){
@@ -126,6 +126,40 @@ class Manager{
             }
         }
         return data
+    }
+
+    send_image(body){
+        this.update_users()
+        for(let i = 0; i < this.users.length; i++){
+            if(this.users[i]["id"] == body.id){
+                if(this.users[i]["img"]){
+                    return path.join(__dirname + `/../img/${body.id}.png`)
+                } else{
+                    return path.join(__dirname + `/../img/default.png`)
+                }
+            }
+        }
+    }
+
+    send_chat(body){
+        let chats = JSON.parse(this.fs.readFileSync('messages.json', 'utf8'));
+        let chat
+        let found = false
+        for(let i = 0; i < chats.length; i++){
+            if(body.chanel == chats[i]["chanel"]){
+                chat = chats[i]
+                found = true
+            }
+        }
+        if(!found){
+            chat = {
+                chanel: body.chanel,
+                messages: []
+            }
+            chats.push(chat)
+            this.fs.writeFileSync("messages.json", JSON.stringify(chats))
+        }
+        return chat
     }
 }
 

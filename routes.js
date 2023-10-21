@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pug = require("pug")
 const path = require('path')
+const request = require('request');
 
 let dir = "./build"
 //let dir = "./dist"
@@ -55,6 +56,14 @@ router.get("/news_page", (req, res) => {
 router.post("/send_news", (req, res) => {
     res.json(manager.send_news(req.body.id))
 })
+
+router.post('/send_image', (req, res) => {
+    res.sendFile(manager.send_image(req.body))
+});
+
+router.post("/send_chat", (req, res) => {
+    res.json(manager.send_chat(req.body))
+});
 
 router.get("*", (req, res)=>{
     res.status(404);
