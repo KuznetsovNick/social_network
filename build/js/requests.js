@@ -61,7 +61,7 @@ function open_news() {
   document.location.href = "/news_page";
 }
 function get_news() {
-  sendRequest("GET", "/send_news").then(function (res) {
+  sendRequest("POST", "/send_news").then(function (res) {
     return res.json();
   }).then(function (json) {
     return show_news(json);

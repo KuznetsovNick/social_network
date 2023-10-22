@@ -89,6 +89,7 @@ class Manager{
                 for(let j =0; j < this.users.length; j++){
                     if (news[i]["id"] == this.users[j]["id"]){
                         send_news.push({
+                            id: this.users[j]["id"],
                             name: this.users[j]["name"],
                             posts: news[i]["posts"]
                         })
@@ -103,6 +104,7 @@ class Manager{
                     for(let k=0; k < news.length; k++){
                         if(this.users[j]["id"] == news[k]["id"]) {
                             send_news.push({
+                                id: this.users[j]["id"],
                                 name: this.users[j]["name"],
                                 posts: news[k]["posts"]
                             })
@@ -180,6 +182,16 @@ class Manager{
             this.fs.writeFileSync("messages.json", JSON.stringify(chats))
         }
         return chat
+    }
+
+    delete_img(body){
+        this.update_users()
+        for(let i = 0; i < this.users.length; i++){
+            if(body.id == this.users[i]["id"]){
+                this.users[i]["img"] = false
+            }
+        }
+        this.write_to_file()
     }
 
 }

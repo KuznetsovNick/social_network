@@ -19,9 +19,17 @@ router.get("/update", (req, res) => {
     res.json(manager.send_library())
 })
 
+
+router.get("/update_friends", (req, res) => {
+    res.json(manager.send_friends())
+})
+
+
 router.post("/get_friends", (req, res) => {
     res.json(manager.send_friends(req.body.id))
 })
+
+
 
 router.post("/save_changes", (req, res) => {
     manager.change_user(req.body)
@@ -67,6 +75,11 @@ router.post("/send_chat", (req, res) => {
 
 router.post("/add_user", (req, res) => {
     res.json(manager.add_user(req.body))
+});
+
+router.post("/delete_img", (req, res) => {
+    manager.delete_img(req.body)
+    res.end()
 });
 
 router.get("*", (req, res)=>{

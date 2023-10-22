@@ -65,7 +65,7 @@ function open_news(){
 }
 
 function get_news(){
-    sendRequest("GET", "/send_news")
+    sendRequest("POST", "/send_news")
         .then(res => res.json())
         .then(json => show_news(json))
 }

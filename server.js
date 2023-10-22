@@ -43,6 +43,7 @@ let socket_io = socket(server, {
     }
 })
 
+require('events').EventEmitter.prototype._maxListeners = 150;
 socket_io.on("connection", (socket) => {
     for(let i = 0; i < 30; i++){
         for(let j = 0; j < 30; j++){
@@ -51,6 +52,13 @@ socket_io.on("connection", (socket) => {
                 work_with_message(`${i}-${j}`, data)
             })
         }
+    }
+
+    for(let i = 0; i < 30; i++){
+        socket.on(`${i}`, (data) => {
+            socket_io.sockets.emit(`${i}`, data)
+            work_with_news(data)
+        })
     }
 })
 
@@ -63,6 +71,18 @@ function work_with_message(chanel, data){
     }
     fs.writeFileSync("messages.json", JSON.stringify(chats))
 }
+
+function work_with_news(data){
+    let news = JSON.parse(fs.readFileSync('news.json', 'utf8'));
+    for(let i = 0; i < news.length; i++){
+        if(data.id == news[i]["id"]){
+            news[i].posts.push(data.news)
+        }
+    }
+    fs.writeFileSync("news.json", JSON.stringify(news))
+}
+
+
 
 server.listen(port);
 console.log(`https://localhost:${port}`)
