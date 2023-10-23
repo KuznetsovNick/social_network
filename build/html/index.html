@@ -25,7 +25,7 @@
 <div class="user_action"><img id="img"><input id="name" type="text"><input id="email" type="email"><input id="bd" type="date">
     <div class="role"><input id="admin" type="radio" name="role" value="admin"><label for="admin">admin</label><input id="user" type="radio" name="role" value="user"><label for="user">user</label></div>
     <div class="status"><input id="unconfirmed" type="radio" name="status" value="unconfirmed"><label for="unconfirmed">unconf</label><input id="active" type="radio" name="status" value="active"><label for="active">active</label><input id="blocked" type="radio" name="status" value="blocked"><label for="blocked">block</label></div><button id="save_changes" onclick="save_changes()">save</button><button id="news" onclick="open_news()">news</button><button id="friends" onclick="open_friends()">friends</button><button id="close_info" onclick="close_info()">close</button>
-</div><button id="prev" onclick="prev_page()">prev</button><button id="next" onclick="next_page()">next</button>
+</div><button id="back" onclick="document.location.href = 'http://localhost:4200/'">back to app</button><button id="prev" onclick="prev_page()">prev</button><button id="next" onclick="next_page()">next</button>
 <script>
     update_list()
 </script>

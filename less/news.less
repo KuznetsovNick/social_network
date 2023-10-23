@@ -1,11 +1,13 @@
 @import "global.less";
 
 #close_info{
-  position: absolute;
-  left: calc(50% - @list_width/10);
+  position: fixed;
+  right: @font;
+  top: @font;
   text-align: center;
   border: none;
   background-color: pink;
   cursor: pointer;
   border-radius: calc(@font/2);
+  font-size: @font;
 }

@@ -43,12 +43,13 @@
 }
 
 #email, #name, #bd, #close_info, #save_changes,
-#friends, #news, #next, #prev{
+#friends, #news, #next, #prev, #back{
   text-align: center;
   border: none;
   background-color: pink;
   cursor: pointer;
   border-radius: calc(@font/2);
+  font-size: @font;
 }
 
 #next, #prev{
@@ -62,4 +63,10 @@
 
 #prev{
   right: calc(50% + @list_width/5);
+}
+
+#back{
+  position: absolute;
+  left: @font;
+  top: @font;
 }

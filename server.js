@@ -14,7 +14,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 const port = 8443;
-httpsOptions = {
+let httpsOptions = {
     key: fs.readFileSync('./certs/open.key', 'utf8'),
     cert: fs.readFileSync('./certs/privat.csr', 'utf8')
 }
@@ -86,3 +86,5 @@ function work_with_news(data){
 
 server.listen(port);
 console.log(`https://localhost:${port}`)
+
+module.exports = server

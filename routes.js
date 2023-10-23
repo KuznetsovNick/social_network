@@ -69,6 +69,10 @@ router.post('/send_image', (req, res) => {
     res.sendFile(manager.send_image(req.body))
 });
 
+router.get('/send_sound', (req, res) => {
+    res.sendFile(path.join(__dirname + "/sound/sound.mp3"))
+});
+
 router.post("/send_chat", (req, res) => {
     res.json(manager.send_chat(req.body))
 });
